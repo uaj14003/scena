@@ -347,34 +347,22 @@ function! boot_scena#Activate(...)
     nnoremap <buffer> <C-v> <C-v><C-v><C-v>
 
     """ 関数のマップは同系列の機能や編集の流れが同じ機能を一つのレターにまとめ
-    """ <C-○>,<C-A-○>,<S-A-○>の順に割り当てることを基本とする
+    """ <C-○>,<A-○>,<S-A-○>に割り当てることを基本とする
 
     """ Test function
     "inoremap <silent> <F2> <Esc>:call scena#Jtest()<CR>
 
-    """ kaoriya版のvimだと<C-A-○>がmapできなかったので<A-○>に割り当て
-    """ その他の環境下では、悲しいかな<A-○>では一部が機能しないので苦肉の策
-    if exists('s:windows')
-      """ Setup Hashira
-      nnoremap <buffer><silent> <A-n> :call scena#SetupHashira()<CR>a
-      inoremap <buffer><silent> <A-n> <Esc>:call scena#SetupHashira()<CR>a
-      """ Line Feed 第1引数:特定の文字列、第2引数:カーソル移動先の桁（ここでは文字列の指定がないので"1"）
-      nnoremap <buffer><silent> <A-m> :call scena#LineFeed('',1)<CR>i
-      inoremap <buffer><silent> <A-m> <Esc>:call scena#LineFeed('',1)<CR>i
-      """ Assist Namae 第1:変数名、第2:カギ括弧の有無、第3:改行の有無
-      nnoremap <buffer><silent> <A-i> i<C-r>=scena#Assist('b:name_dic',0,0)<CR>
-      inoremap <buffer><silent> <A-i> <C-r>=scena#Assist('b:name_dic',0,0)<CR>
-    elseif !exists('s:windows')
-      """ Setup Hashira  (柱を立てる)
-      nnoremap <buffer><silent> <C-A-n> :call scena#SetupHashira()<CR>a
-      inoremap <buffer><silent> <C-A-n> <Esc>:call scena#SetupHashira()<CR>a
-      """ Line Feed  (改行を作る)
-      nnoremap <buffer><silent> <C-A-m> :call scena#LineFeed('',1)<CR>i
-      inoremap <buffer><silent> <C-A-m> <Esc>:call scena#LineFeed('',1)<CR>i
-      """ Assist Namae  (名前を挿入)
-      nnoremap <buffer><silent> <C-A-i> i<C-r>=scena#Assist('b:name_dic',0,0)<CR>
-      inoremap <buffer><silent> <C-A-i> <C-r>=scena#Assist('b:name_dic',0,0)<CR>
-    endif
+    """ 競合するxmonadのショートカットを外したので
+    """ <C-A-○>としてい幾つかのキーバインドを<A-○>とした。
+    """ Setup Hashira
+    nnoremap <buffer><silent> <A-n> :call scena#SetupHashira()<CR>a
+    inoremap <buffer><silent> <A-n> <Esc>:call scena#SetupHashira()<CR>a
+    """ Line Feed 第1引数:特定の文字列、第2引数:カーソル移動先の桁（ここでは文字列の指定がないので"1"）
+    nnoremap <buffer><silent> <A-m> :call scena#LineFeed('',1)<CR>i
+    inoremap <buffer><silent> <A-m> <Esc>:call scena#LineFeed('',1)<CR>i
+    """ Assist Namae 第1:変数名、第2:カギ括弧の有無、第3:改行の有無
+    nnoremap <buffer><silent> <A-i> i<C-r>=scena#Assist('b:name_dic',0,0)<CR>
+    inoremap <buffer><silent> <A-i> <C-r>=scena#Assist('b:name_dic',0,0)<CR>
 
     """ Split Scene  (シーンを割る)
     nnoremap <buffer><silent> <S-A-n> :call scena#SplitScene()<CR>a
