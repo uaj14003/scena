@@ -259,11 +259,16 @@ function! boot_scena#Activate(...)
   "@@@ settings @@@{{{1
   "### setlocal ###{{{2
 
+  """ インデントを無効
   setlocal noautoindent
+  """ コメントアウトを無効
   setlocal formatoptions-=ro
+  """ 行頭行末超えを可能とする設定
+  setlocal whichwrap=b,s,h,l,<,>,[,]
 
   "### voom/unite variables ###{{{2
 
+  """ Unite起動時のウィンドウ分割ルール
   let g:unite_split_rule = 'botright'
 
   "----------------}}}1
@@ -327,14 +332,15 @@ function! boot_scena#Activate(...)
     nnoremap <buffer> ZZ <Nop>
 
     """ PopUpMenu Select
-    inoremap <expr> <Left> pumvisible() ? "\<C-e>" : "\<Left>"
-    inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
-    inoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
-    inoremap <expr> <Right> pumvisible() ? "\<C-y>" : "\<Right>"
+    inoremap <buffer><expr> <Left> pumvisible() ? "\<C-e>" : "\<Left>"
+    inoremap <buffer><expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
+    inoremap <buffer><expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
+    inoremap <buffer><expr> <Right> pumvisible() ? "\<C-y>" : "\<Right>"
 
     """ Select Current Line & Delete
-    inoremap <C-d> <Esc>V
-    vnoremap <C-d> D
+    inoremap <buffer><C-d> <Esc>V
+    nnoremap <buffer><C-d> V
+    vnoremap <buffer><C-d> D
 
     """ BackSpace
     "nnoremap <BS> hx
