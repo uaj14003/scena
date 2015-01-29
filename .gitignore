@@ -1,0 +1,6 @@
+#.gitignore
+*.pyc
+doc/trash/
+plugin/trash/
+autoload/trash/
+autoload/outline/trash/
