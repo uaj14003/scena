@@ -337,10 +337,15 @@ function! boot_scena#Activate(...)
     inoremap <buffer><expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
     inoremap <buffer><expr> <Right> pumvisible() ? "\<C-y>" : "\<Right>"
 
+    """ VOomの関数ToTreeOrBodyWin()の呼び出し
+    """ TreeBufferからの移動もあるのでnnoremapでは、<buffer>を指定しない
+    nnoremap <silent> <S-Tab> :call voom#ToTreeOrBodyWin()<CR>
+    inoremap <buffer><silent> <S-Tab> <Esc>:call voom#ToTreeOrBodyWin()<CR>
+
     """ Select Current Line & Delete
-    inoremap <buffer><C-d> <Esc>V
-    nnoremap <buffer><C-d> V
-    vnoremap <buffer><C-d> D
+    inoremap <buffer> <C-d> <Esc>V
+    nnoremap <buffer> <C-d> V
+    vnoremap <buffer> <C-d> D
 
     """ BackSpace
     "nnoremap <BS> hx
@@ -359,7 +364,7 @@ function! boot_scena#Activate(...)
     "inoremap <silent> <F2> <Esc>:call scena#Jtest()<CR>
 
     """ 競合するxmonadのショートカットを外したので
-    """ <C-A-○>としてい幾つかのキーバインドを<A-○>とした。
+    """ <C-A-○>としていた幾つかのキーバインドを<A-○>とあらためた
     """ Setup Hashira
     nnoremap <buffer><silent> <A-n> :call scena#SetupHashira()<CR>a
     inoremap <buffer><silent> <A-n> <Esc>:call scena#SetupHashira()<CR>a
@@ -375,6 +380,7 @@ function! boot_scena#Activate(...)
     inoremap <buffer><silent> <S-A-n> <Esc>:call scena#SplitScene()<CR>a
 
     """ Assist Hashira  (［回想］など)
+    """ <C-k>kとしたいのだけれど、かな入力なので<C-k><C-k>とする。他の2ストロークも同じ
     nnoremap <buffer><silent> <C-k><C-k> i<C-r>=scena#Assist('g:hashira_dic',0,0)<CR>
     inoremap <buffer><silent> <C-k><C-k> <C-r>=scena#Assist('g:hashira_dic',0,0)<CR>
 
